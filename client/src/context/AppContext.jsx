@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createContext } from "react";
-import { dummyCourses } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import humanizeDuration from 'humanize-duration';
 
@@ -15,7 +14,9 @@ export const AppContextProvider = (props) => {
 
     // Fetch All Courses
     const fetchAllCourses = async () => {
-        setAllCourses(dummyCourses);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/courses`);
+        const data = await response.json();
+        setAllCourses(data);
     };
 
     // Function to calculate the avg rating of a course
@@ -60,7 +61,9 @@ export const AppContextProvider = (props) => {
 
     // Fetch User Enrolled Courses
     const fetchUserEnrolledCourses = async () => {
-        setEnrolledCourses(dummyCourses);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/enrollments`);
+        const data = await response.json();
+        setEnrolledCourses(data);
     }
       
 
